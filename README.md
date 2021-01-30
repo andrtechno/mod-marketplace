@@ -1,13 +1,13 @@
 # Module discount [RU описание](README_RU.md)
 
-Module markup for "Pixelion CMS"
+Module marketplace for "Pixelion CMS"
 
-[![Latest Stable Version](https://poser.pugx.org/panix/mod-markup/v/stable)](https://packagist.org/packages/panix/mod-markup)
-[![Total Downloads](https://poser.pugx.org/panix/mod-markup/downloads)](https://packagist.org/packages/panix/mod-markup)
-[![Monthly Downloads](https://poser.pugx.org/panix/mod-markup/d/monthly)](https://packagist.org/packages/panix/mod-markup)
-[![Daily Downloads](https://poser.pugx.org/panix/mod-markup/d/daily)](https://packagist.org/packages/panix/mod-markup)
-[![Latest Unstable Version](https://poser.pugx.org/panix/mod-markup/v/unstable)](https://packagist.org/packages/panix/mod-markup)
-[![License](https://poser.pugx.org/panix/mod-markup/license)](https://packagist.org/packages/panix/mod-markup)
+[![Latest Stable Version](https://poser.pugx.org/panix/mod-marketplace/v/stable)](https://packagist.org/packages/panix/mod-marketplace)
+[![Total Downloads](https://poser.pugx.org/panix/mod-marketplace/downloads)](https://packagist.org/packages/panix/mod-marketplace)
+[![Monthly Downloads](https://poser.pugx.org/panix/mod-marketplace/d/monthly)](https://packagist.org/packages/panix/mod-marketplace)
+[![Daily Downloads](https://poser.pugx.org/panix/mod-marketplace/d/daily)](https://packagist.org/packages/panix/mod-marketplace)
+[![Latest Unstable Version](https://poser.pugx.org/panix/mod-marketplace/v/unstable)](https://packagist.org/packages/panix/mod-marketplace)
+[![License](https://poser.pugx.org/panix/mod-marketplace/license)](https://packagist.org/packages/panix/mod-marketplace)
 
 
 ## Installation
@@ -17,13 +17,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 #### Either run
 
 ```
-php composer require --prefer-dist panix/mod-markup "*"
+php composer require --prefer-dist panix/mod-marketplace "*"
 ```
 
 or add
 
 ```
-"panix/mod-markup": "*"
+"panix/mod-marketplace": "*"
 ```
 
 to the require section of your `composer.json` file.
@@ -31,13 +31,13 @@ to the require section of your `composer.json` file.
 #### Add to web config.
 ```
 'modules' => [
-    'markup' => ['class' => 'panix\markup\Module'],
+    'marketplace' => ['class' => 'panix\marketplace\Module'],
 ],
 ```
 
 #### Migrate
 ```
-php yii migrate --migrationPath=vendor/panix/mod-markup/migrations
+php yii migrate --migrationPath=vendor/panix/mod-marketplace/migrations
 ```
 
 ## See also

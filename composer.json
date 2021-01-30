@@ -1,7 +1,7 @@
 {
     "name": "panix/mod-marketplace",
-    "description": "Module markup",
-    "keywords": ["pixelion-cms", "module", "markup"],
+    "description": "Module marketplace",
+    "keywords": ["pixelion-cms", "module", "marketplace"],
     "homepage": "https://github.com/andrtechno/mod-marketplace",
     "type": "yii2-extension",
     "license": "MIT",

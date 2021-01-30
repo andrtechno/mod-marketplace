@@ -1,8 +1,8 @@
 <?php
 
-namespace panix\mod\markup;
+namespace panix\mod\marketplace;
 
-use panix\mod\markup\models\Markup;
+use panix\mod\marketplace\models\marketplace;
 use Yii;
 use yii\base\BootstrapInterface;
 use panix\engine\WebModule;
@@ -11,32 +11,29 @@ use panix\mod\admin\widgets\sidebar\BackendNav;
 class Module extends WebModule implements BootstrapInterface
 {
 
-    public $icon = 'markups';
+    public $icon = 'marketplace';
 
     /**
      * @var null
      */
-    public $markups = null;
+    public $marketplaces = null;
     /**
      * @inheritdoc
      */
     public function bootstrap($app)
     {
-        if ($this->markups === null) { //$app->id != 'console' &&
 
-            $this->markups = Markup::find()->published()->all();
-        }
     }
 
     public function getInfo()
     {
         return [
-            'label' => Yii::t('markup/default', 'MODULE_NAME'),
+            'label' => Yii::t('marketplace/default', 'MODULE_NAME'),
             'author' => 'andrew.panix@gmail.com',
             'version' => '1.0',
             'icon' => $this->icon,
-            'description' => Yii::t('markup/default', 'MODULE_DESC'),
-            'url' => ['/admin/markup/default/index'],
+            'description' => Yii::t('marketplace/default', 'MODULE_DESC'),
+            'url' => ['/admin/marketplace/default/index'],
         ];
     }
 
@@ -51,10 +48,10 @@ class Module extends WebModule implements BootstrapInterface
             'shop' => [
                 'items' => [
                     [
-                        'label' => Yii::t('markup/default', 'MODULE_NAME'),
-                        'url' => ['/admin/markup/default/index'],
+                        'label' => Yii::t('marketplace/default', 'MODULE_NAME'),
+                        'url' => ['/admin/marketplace/default/index'],
                         'icon' => $this->icon,
-                        'visible' => Yii::$app->user->can('/markup/admin/default/index') || Yii::$app->user->can('/markup/admin/default/*')
+                        'visible' => Yii::$app->user->can('/marketplace/admin/default/index') || Yii::$app->user->can('/marketplace/admin/default/*')
                     ],
                 ],
             ],
