@@ -1,8 +1,8 @@
 {
-    "name": "panix/mod-markup",
+    "name": "panix/mod-marketplace",
     "description": "Module markup",
     "keywords": ["pixelion-cms", "module", "markup"],
-    "homepage": "https://github.com/andrtechno/mod-markup",
+    "homepage": "https://github.com/andrtechno/mod-marketplace",
     "type": "yii2-extension",
     "license": "MIT",
     "authors": [
@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "panix\\mod\\markup\\": ""
+            "panix\\mod\\marketplace\\": ""
         }
     }
 }
