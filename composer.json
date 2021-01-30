@@ -1,0 +1,20 @@
+{
+    "name": "panix/mod-markup",
+    "description": "Module markup",
+    "keywords": ["pixelion-cms", "module", "markup"],
+    "homepage": "https://github.com/andrtechno/mod-markup",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PIXELION CMS",
+            "email": "dev@pixelion.com.ua",
+            "homepage": "https://pixelion.com.ua"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "panix\\mod\\markup\\": ""
+        }
+    }
+}
