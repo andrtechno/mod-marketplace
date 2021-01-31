@@ -17,6 +17,7 @@ class Module extends WebModule implements BootstrapInterface
      * @var null
      */
     public $marketplaces = null;
+
     /**
      * @inheritdoc
      */
@@ -45,15 +46,11 @@ class Module extends WebModule implements BootstrapInterface
     public function getAdminMenu()
     {
         return [
-            'shop' => [
-                'items' => [
-                    [
-                        'label' => Yii::t('marketplace/default', 'MODULE_NAME'),
-                        'url' => ['/admin/marketplace/default/index'],
-                        'icon' => $this->icon,
-                        'visible' => Yii::$app->user->can('/marketplace/admin/default/index') || Yii::$app->user->can('/marketplace/admin/default/*')
-                    ],
-                ],
+            [
+                'label' => Yii::t('marketplace/default', 'MODULE_NAME'),
+                'url' => ['/admin/marketplace/default/index'],
+                'icon' => $this->icon,
+                'visible' => YII_DEBUG
             ],
         ];
     }
