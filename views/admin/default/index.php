@@ -3,7 +3,37 @@
 use panix\engine\widgets\Pjax;
 use panix\engine\grid\GridView;
 
+\panix\engine\CMS::dump($install);
+
 ?>
+<div class="row">
+<?php foreach ($install as $type=>$items){ ?>
+    <?php foreach ($items as $item){ ?>
+    <div class="col-sm-3">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="float-left"><?= $item['name']; ?></h5>
+            <span class="float-right badge badge-danger mt-2 mr-2 h6"><?= $type; ?></span>
+        </div>
+        <div class="card-body">
+            <img src="https://via.placeholder.com/500" class="img-fluid"/>
+            <p class="m-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </div>
+        <div class="card-footer ">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>30$</h4>
+                </div>
+                <div class="col-sm-6 text-right">
+                    <a href="#" class="btn btn-success">Купить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <?php } ?>
+<?php } ?>
+</div>
 <div class="container-fluid">
 
 
