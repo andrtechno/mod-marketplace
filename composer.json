@@ -3,7 +3,7 @@
     "description": "Module marketplace",
     "keywords": ["pixelion-cms", "module", "marketplace"],
     "homepage": "https://github.com/andrtechno/mod-marketplace",
-    "type": "yii2-extension",
+    "type": "pixelion-module",
     "license": "MIT",
     "authors": [
         {
