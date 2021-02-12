@@ -12,6 +12,7 @@ use panix\mod\marketplace\models\marketplace;
 use panix\mod\marketplace\models\marketplaceSearch;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\web\ForbiddenHttpException;
 
 class DefaultController extends AdminController
 {
@@ -74,15 +75,6 @@ class DefaultController extends AdminController
             ];
 
 
-// get DOM from URL or file
-            $doc = new HtmlWeb();
-            $html = $doc->load('https://yandex.ru/search/ads?&rid=213&text=купить+дом');
-
-// find all links
-            foreach ($html->find('a') as $e)
-                echo $e->href . '<br>' . PHP_EOL;
-
-
 // Composer\Factory::getHomeDir() method
 // needs COMPOSER_HOME environment variable set
 ////putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
@@ -111,6 +103,60 @@ class DefaultController extends AdminController
             echo system('composer require --prefer-dist "smarty/smartytest" -vv --profile --no-progress --ansi --no-interaction');
             die;
             CMS::dump($composer);
+        }
+    }
+
+    public function actionComposer()
+    {
+        $phppath = getenv('PHPDIR');
+        // $exec2= exec('composer require smarty/smartytest');
+        //  $exec= exec('composer --version');
+        // $cmd = $phppath."php -d composer require --prefer-dist panix/mod-google-shopping";
+        // echo $cmd;die;
+        //$exec1= shell_exec($cmd);
+        // $sexec= shell_exec('composer require whichbrowser/parser');
+
+        // echo $exec;
+        //  echo '<pre>'.$exec1.'</pre>';
+        // echo $exec;
+        // echo $sexec;
+        // $result = shell_exec(''.$phppath.'/php -d xdebug.remote_enable=0 -d xdebug.profiler_enable=0 -d xdebug.default_enable=0 D:\OpenServer\userdata\composer\composer.phar install');
+
+
+        echo '<pre>' . $result . '</pre>';
+        die;
+
+    }
+
+    public function actionExt()
+    {
+
+        CMS::dump(Yii::$app->extensions);
+        die;
+
+    }
+
+    public function api()
+    {
+        $data['items'] = [];
+
+        $itemsList = ['panix/mod-pages', 'panix/mod-navaposhta', 'panix/mod-shop'];
+        foreach ($itemsList as $item) {
+            $data['items'][] = [
+                'name' => $item
+            ];
+        }
+
+
+        return $data;
+    }
+
+    public function actionSendFile($token)
+    {
+        if ($token == '123') {
+            Yii::$app->response->xSendFile(Yii::getAlias('@marketplace') . DIRECTORY_SEPARATOR . 'mod-google-shopping-master.zip');
+        } else {
+            throw new ForbiddenHttpException();
         }
     }
 }
