@@ -2,22 +2,31 @@
 
 use panix\engine\widgets\Pjax;
 use panix\engine\grid\GridView;
+use yii\helpers\Html;
 
 //\panix\engine\CMS::dump($install);
 $client = new \Github\Client();
-$client->authenticate('6894c3d8088d78703f422594ab41230389b1ac02', null, Github\Client::AUTH_ACCESS_TOKEN);
+//$client->authenticate('6894c3d8088d78703f422594ab41230389b1ac02', null, Github\Client::AUTH_ACCESS_TOKEN);
+$client->authenticate('andrew.panix@gmail.com', 'Panix47228960', Github\Client::AUTH_CLIENT_ID);
 
+//$tags = $client->api('repo')->tags('andrtechno', 'mod-novaposhta');
 
-$repositories = $client->api('me')->repositories('test');
-$protection = $client->api('repo')->protection()->showStatusChecks('andrtechno', 'test', 'main');
-$release = $client->api('repo')->releases()->all('andrtechno', 'test');
-
-\panix\engine\CMS::dump($protection);
+$repositories = $client->api('user')->repositories('andrtechno');
+//$protection = $client->api('repo')->protection()->showStatusChecks('andrtechno', 'test', 'main');
+//$release = $client->api('repo')->releases()->all('andrtechno', 'test');
+$marketItems = $this->context->api()['items'];
+\panix\engine\CMS::dump(array_column($marketItems, 'name'));
+$c=array_column($marketItems, 'name');
 ?>
 <div class="row">
     <?php foreach ($install as $type => $items) { ?>
         <?php foreach ($items as $item) {
 
+            if(in_array($item['name'],$c)){
+                $is_install=true;
+            }else{
+                $is_install=false;
+            }
 
             ?>
             <div class="col-sm-3">
@@ -48,7 +57,14 @@ $release = $client->api('repo')->releases()->all('andrtechno', 'test');
                                 <h4>30$</h4>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <a href="#" class="btn btn-success">Купить</a>
+                                <?php
+                                if($is_install){
+                                    echo 'installed';
+                                }else{
+                                    echo Html::a('Купить','',['class'=>'btn btn-success']);
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </div>

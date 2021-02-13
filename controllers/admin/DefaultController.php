@@ -1,11 +1,17 @@
 <?php
 
 namespace panix\mod\marketplace\controllers\admin;
+use Composer\Command\UpdateCommand;
+use Composer\Composer;
+use Composer\Installer;
+use Composer\IO\NullIO;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\StreamOutput;
 
-use Composer\Console\Application;
 use panix\engine\CMS;
 use simplehtmldom\HtmlWeb;
-use Symfony\Component\Console\Input\ArrayInput;
+
 use Yii;
 use panix\engine\controllers\AdminController;
 use panix\mod\marketplace\models\marketplace;
@@ -158,5 +164,29 @@ class DefaultController extends AdminController
         } else {
             throw new ForbiddenHttpException();
         }
+    }
+    public function actionTester(){
+
+
+
+            //create composer.json with some content
+            //require_once 'composer-source/vendor/autoload.php';
+            putenv('COMPOSER_HOME=' . Yii::getAlias('@vendor') . '/composer/bin/composer');
+            chdir(__DIR__);
+
+            $stream = fopen('php://temp', 'w+');
+            $output = new StreamOutput($stream);
+            $application = new Application();
+            $application->setAutoExit(false);
+
+        //$input = new ArrayInput(array('command' => 'require', 'packages' => ['yiisoft/yii2-twig']));
+        $input = new ArrayInput(array('command' => 'require yiisoft/yii2-twig'));
+        //new ArrayInput(array('command' => 'install'))
+
+            $code = $application->run($input, $output);
+echo $code;
+            var_dump(stream_get_contents($stream));
+            die;
+
     }
 }
