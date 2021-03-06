@@ -7,17 +7,17 @@ use Composer\Installer;
 use Composer\IO\NullIO;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\Console\Output\StreamOutput;
-
 use panix\engine\CMS;
 use simplehtmldom\HtmlWeb;
-
 use Yii;
 use panix\engine\controllers\AdminController;
 use panix\mod\marketplace\models\marketplace;
 use panix\mod\marketplace\models\marketplaceSearch;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\httpclient\Client;
 use yii\web\ForbiddenHttpException;
 
 class DefaultController extends AdminController
@@ -31,24 +31,43 @@ class DefaultController extends AdminController
         $extensions = Yii::$app->extensions;
 
 
+        $items=[];
+        $client = new Client(['baseUrl' => 'http://marketplace.pixelion.com.ua/marketplaceServer/default/list']);
+        $response = $client->createRequest()
+            ->setMethod('GET')
+            ->setFormat(Client::FORMAT_JSON)
+           // ->setUrl('http://marketplace.pixelion.com.ua/marketplaceServer/default/list')
+            //->setData(['api' => 'key'])
+            ->send();
+        if ($response->isOk) {
+            $items = $response->data;
+           //CMS::dump($response->data);die;
+        }else{
+            echo 'error';die;
+           // CMS::dump($response);die;
+        }
+
+
+
         //  CMS::dump($extensions);die;
         $install = [];
         foreach ($extensions as $ext) {
             if (isset($ext['type'])) {
                 if ($ext['type'] == 'pixelion-theme') {
-                    $install['theme'][] = $ext;
+                    $install['theme'][$ext['name']] = $ext;
                 } elseif ($ext['type'] == 'pixelion-widget') {
-                    $install['widget'][] = $ext;
+                    $install['widget'][$ext['name']] = $ext;
                 } elseif ($ext['type'] == 'pixelion-component') {
-                    $install['component'][] = $ext;
+                    $install['component'][$ext['name']] = $ext;
                 } elseif ($ext['type'] == 'pixelion-module') {
-                    $install['module'][] = $ext;
+                    $install['module'][$ext['name']] = $ext;
                 }
             }
         }
 
         return $this->render('index', [
-            'install' => $install
+            'install' => $install,
+            'items'=>$items
         ]);
     }
 
@@ -85,13 +104,28 @@ class DefaultController extends AdminController
 // needs COMPOSER_HOME environment variable set
 ////putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
 
-// call `composer install` command programmatically
-            $input = new ArrayInput(array('command' => 'require --prefer-dist smarty/smartytest'));
+
+            putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
+
+
+            chdir(__DIR__);
+            $stream = fopen('php://temp', 'w+');
+            $output = new StreamOutput($stream);
             $application = new Application();
-            $application->setAutoExit(false); // prevent `$application->run` method from exitting the script
-            $application->run();
+            $application->setAutoExit(false);
+            $code = $application->run(new ArrayInput(array('command' => 'install')), $output);
+            echo stream_get_contents($stream);
+
+
+
+           /* $input = new ArrayInput(array('command' => 'require panix/mod-mailchimp'));
+            $application = new Application();
+            $application->setAutoExit(false);
+            $application->run($input);*/
 
             echo "Done.";
+
+
 
 
             // $test = ArrayHelper::merge($composer, $repo);
@@ -106,7 +140,7 @@ class DefaultController extends AdminController
             // echo $exec2;
             // echo $exec;
             // echo $sexec;
-            echo system('composer require --prefer-dist "smarty/smartytest" -vv --profile --no-progress --ansi --no-interaction');
+            echo system('composer require --prefer-dist "panix/mod-mailchimp" -vv --profile --no-progress --ansi --no-interaction');
             die;
             CMS::dump($composer);
         }
@@ -146,7 +180,7 @@ class DefaultController extends AdminController
     {
         $data['items'] = [];
 
-        $itemsList = ['panix/mod-pages', 'panix/mod-navaposhta', 'panix/mod-shop'];
+        $itemsList = ['panix/mod-pages', 'panix/mod-novaposhta', 'panix/mod-shop'];
         foreach ($itemsList as $item) {
             $data['items'][] = [
                 'name' => $item
