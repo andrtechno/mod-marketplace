@@ -54,13 +54,13 @@ class DefaultController extends AdminController
         foreach ($extensions as $ext) {
             if (isset($ext['type'])) {
                 if ($ext['type'] == 'pixelion-theme') {
-                    $install['theme'][$ext['name']] = $ext;
+                    $install['themes'][$ext['name']] = $ext;
                 } elseif ($ext['type'] == 'pixelion-widget') {
-                    $install['widget'][$ext['name']] = $ext;
+                    $install['widgets'][$ext['name']] = $ext;
                 } elseif ($ext['type'] == 'pixelion-component') {
                     $install['component'][$ext['name']] = $ext;
                 } elseif ($ext['type'] == 'pixelion-module') {
-                    $install['module'][$ext['name']] = $ext;
+                    $install['modules'][$ext['name']] = $ext;
                 }
             }
         }
