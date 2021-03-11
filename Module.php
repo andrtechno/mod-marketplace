@@ -6,7 +6,7 @@ use panix\mod\marketplace\models\marketplace;
 use Yii;
 use yii\base\BootstrapInterface;
 use panix\engine\WebModule;
-use panix\mod\admin\widgets\sidebar\BackendNav;
+use app\web\themes\dashboard\sidebar\BackendNav;
 
 class Module extends WebModule implements BootstrapInterface
 {
