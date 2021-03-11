@@ -5,13 +5,12 @@ use panix\engine\grid\GridView;
 use yii\helpers\Html;
 
 
-
 ?>
 <div class="container-fluid2">
     <div class="row2">
         <div class="card">
             <div class="card-header">
-Список
+                Список
             </div>
             <div class="card-body">
 
@@ -58,16 +57,17 @@ use yii\helpers\Html;
                                         <div class="card">
                                             <div class="card-header">
                                                 <h5 class="float-left"><?= $item['name']; ?></h5>
-                                                <span class="float-right badge badge-danger mt-2 mr-2 h6"><?= $item['type']; ?></span>
+                                                <span class="float-right badge badge-success mt-2 mr-2 h6"><?php echo $item['version']; ?></span>
                                             </div>
                                             <div class="card-body">
-                                                <?php if (isset($item['preview'])) { ?>
-                                                    <img src="<?= $item['preview']; ?>" class="img-fluid"/>
-                                                <?php } else { ?>
-                                                    <img src="https://via.placeholder.com/500x300/fff/000?text=<?= $item['name']; ?>"
-                                                         class="img-fluid"/>
-                                                <?php } ?>
-
+                                                <div style="height: 300px" class="m-auto d-flex align-items-center">
+                                                    <?php if (isset($item['preview'])) { ?>
+                                                        <img src="<?= $item['preview']; ?>" class="img-fluid"/>
+                                                    <?php } else { ?>
+                                                        <img src="https://via.placeholder.com/500x300/fff/000?text=<?= $item['name']; ?>"
+                                                             class="img-fluid"/>
+                                                    <?php } ?>
+                                                </div>
                                                 <?php
                                                 if (isset($install[$type][$item['packageName']])) {
                                                     echo 'Текущая версия: ' . $install[$type][$item['packageName']]['version'];
@@ -91,7 +91,15 @@ use yii\helpers\Html;
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <?php if (!$is_install) { ?>
-                                                            <h4>30$</h4>
+                                                            <h4>
+                                                                <?php
+                                                                if (is_string($item['price'])) {
+                                                                    echo $item['price'];
+                                                                } else {
+                                                                    echo $item['price'] . ' UAH';
+                                                                }
+                                                                ?>
+                                                            </h4>
                                                         <?php } ?>
 
                                                     </div>
